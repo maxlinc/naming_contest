@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @name.title %>
+</p>
+
+<p>
+  <strong>Subtitle:</strong>
+  <%= @name.subtitle %>
+</p>
+
+
+<%= link_to 'Edit', edit_name_path(@name) %> |
+<%= link_to 'Back', names_path %>

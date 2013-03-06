@@ -12,5 +12,29 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require twitter/bootstrap
 //= require turbolinks
 //= require_tree .
+
+jQuery(function($) {
+  // create a convenient toggleLoading function
+  var toggleLoading = function() { $("#loading").toggle() };
+
+  $("a.btn")
+    .bind("ajax:loading",  toggleLoading)
+    .bind("ajax:complete", toggleLoading)
+    .bind("ajax:success", function(event, data, status, xhr) {
+      value = get_value(event, data);
+      old_value = event.target.text;
+      new_html = event.target.innerHTML.replace(old_value, value);
+      event.target.innerHTML = new_html;
+    });
+});
+
+var get_value = function(event, data) {
+  if (event.target.id.indexOf('_up') != -1) {
+    return data.up;
+  } else {
+    return data.down;
+  }
+}

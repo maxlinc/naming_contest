@@ -12,6 +12,7 @@ gem 'omniauth'
 gem 'omniauth-cas'
 gem 'omniauth-openid'
 gem 'oa-openid'
+gem "twitter-bootstrap-rails"
 
 # Gems used only for assets and not required
 # in production environments by default.

@@ -5,9 +5,11 @@ NamingContest::Application.routes.draw do
     get 'sign_in', :to => 'devise/sessions#new', :as => :new_user_session
     get 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session
   end
-  
+
   resources :names
   root to: 'names#index'
+
+  get 'vote/:id' => 'names#vote', :as => :vote
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

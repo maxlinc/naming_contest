@@ -1,7 +1,7 @@
 class NamesController < ApplicationController
   before_filter :authenticate_user!
-  skip_before_filter :check_sign_in, :only => [:new, :create]
-  before_action :set_name, only: [:show, :edit, :update, :destroy]
+  skip_before_filter :check_sign_in, :only => [:new, :create, :vote]
+  before_action :set_name, only: [:show, :edit, :update, :destroy, :vote]
 
   # GET /names
   # GET /names.json
@@ -63,6 +63,17 @@ class NamesController < ApplicationController
       format.html { redirect_to names_url }
       format.json { head :no_content }
     end
+  end
+
+  def vote
+    against = (params[:vote] == 'false')
+    if against
+      current_user.vote_exclusively_against @name
+    else
+      current_user.vote_exclusively_for @name
+    end
+
+    render :json => {up: @name.votes_for, down: @name.votes_against}
   end
 
   private

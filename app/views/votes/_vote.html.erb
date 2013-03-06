@@ -2,5 +2,5 @@
     <% vote_verb = vote.vote ? "for" : "against" %>
       <div class="vote alert alert-<%= vote_class %>" data-time="<%= vote.created_at.to_i %>">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <%= vote.voter.email %> voted <%= vote_verb %> <%= vote.voteable.title %>
+        Someone voted <%= vote_verb %> <%= vote.voteable.title %>
       </div>

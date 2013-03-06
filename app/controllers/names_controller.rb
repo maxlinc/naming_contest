@@ -1,4 +1,6 @@
 class NamesController < ApplicationController
+  before_filter :authenticate_user!
+  skip_before_filter :check_sign_in, :only => [:new, :create]
   before_action :set_name, only: [:show, :edit, :update, :destroy]
 
   # GET /names

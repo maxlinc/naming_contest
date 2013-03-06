@@ -5,6 +5,13 @@ gem 'rails', '4.0.0.beta1'
 
 # gem 'pg'
 gem 'sqlite3'
+gem 'thumbs_up'
+gem 'devise', git: 'git://github.com/plataformatec/devise.git', branch: 'rails4'
+gem 'protected_attributes'
+gem 'omniauth'
+gem 'omniauth-cas'
+gem 'omniauth-openid'
+gem 'oa-openid'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -37,3 +44,8 @@ gem 'jbuilder', '~> 1.0.1'
 
 # To use debugger
 # gem 'debugger'
+
+group :development, :test do
+  gem 'rspec'
+  gem 'rspec-rails'
+end

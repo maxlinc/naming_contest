@@ -26,6 +26,8 @@ class NamesController < ApplicationController
   # POST /names
   # POST /names.json
   def create
+    a_hash = {user_id: current_user.id}
+    name_params.merge! a_hash
     @name = Name.new(name_params)
 
     respond_to do |format|

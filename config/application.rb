@@ -25,6 +25,6 @@ module NamingContest
     # config.i18n.default_locale = :de
     config.assets.initialize_on_precompile = false
 
-    config.logger = Logger.new(STDOUT)
+#    config.logger = Logger.new(STDOUT)
   end
 end

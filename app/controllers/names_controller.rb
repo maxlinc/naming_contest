@@ -21,10 +21,6 @@ class NamesController < ApplicationController
     @name = Name.new
   end
 
-  # GET /names/1/edit
-  def edit
-  end
-
   # POST /names
   # POST /names.json
   def create
@@ -40,30 +36,6 @@ class NamesController < ApplicationController
         format.html { render action: 'new' }
         format.json { render json: @name.errors, status: :unprocessable_entity }
       end
-    end
-  end
-
-  # PATCH/PUT /names/1
-  # PATCH/PUT /names/1.json
-  def update
-    respond_to do |format|
-      if @name.update(name_params)
-        format.html { redirect_to @name, notice: 'Name was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @name.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /names/1
-  # DELETE /names/1.json
-  def destroy
-    @name.destroy
-    respond_to do |format|
-      format.html { redirect_to names_url }
-      format.json { head :no_content }
     end
   end
 

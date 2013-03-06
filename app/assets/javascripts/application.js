@@ -16,7 +16,25 @@
 //= require turbolinks
 //= require_tree .
 
+var update_value = function(element, value) {
+  var old_value = element.text();
+  var new_html = element.html().replace(old_value, value);
+  // alert("Changing " + old_value + " to " + value + " for " + element.id);
+  element.html(new_html);
+}
+
+var update_score = function(data) {  
+  jQuery.each(data, function(key, value) {
+                    // alert("key: " + key + ", value: " + value.up + ":" + value.down);
+                    var up_element = $("#item_" + key + "_up");
+                    update_value(up_element, value.up);
+                    var down_element = $("#item_" + key + "_down");
+                    update_value(down_element, value.down);
+                  });
+}
+
 jQuery(function($) {
+
   // create a convenient toggleLoading function
   var toggleLoading = function() { $("#loading").toggle() };
 
@@ -24,20 +42,22 @@ jQuery(function($) {
     .bind("ajax:loading",  toggleLoading)
     .bind("ajax:complete", toggleLoading)
     .bind("ajax:success", function(event, data, status, xhr) {
-      value = get_value(event, data);
-      old_value = event.target.text;
-      new_html = event.target.innerHTML.replace(old_value, value);
-      event.target.innerHTML = new_html;
+      update_score(data);
     });
 });
 
-var get_value = function(event, data) {
-  if (event.target.id.indexOf('_up') != -1) {
-    return data.up;
-  } else {
-    return data.down;
-  }
-}
+(function poll() {
+    setTimeout(function() {
+        $.ajax({
+            url: "/score.json",
+            type: "GET",
+            success: update_score,
+            dataType: "json",
+            complete: poll,
+            timeout: 2000
+        })
+    }, 5000);
+})();
 
 $(function() {
   if ($("#suggestions").length > 0) {

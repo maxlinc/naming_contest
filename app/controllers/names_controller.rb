@@ -79,7 +79,16 @@ class NamesController < ApplicationController
       current_user.vote_exclusively_for @name
     end
 
-    render :json => {up: @name.votes_for, down: @name.votes_against}
+    score
+  end
+
+  def score
+    names = Name.all
+    response = names.inject({}) do |result, name|
+      result[name.id] = {up: name.votes_for, down: name.votes_against}
+      result
+    end
+    render :json => response
   end
 
   private

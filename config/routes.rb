@@ -11,6 +11,7 @@ NamingContest::Application.routes.draw do
 
   get 'vote/:id' => 'names#vote', :as => :vote
   get 'votes' => 'names#votes', :as => :votes
+  get 'score' => 'names#score', :as => :score
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

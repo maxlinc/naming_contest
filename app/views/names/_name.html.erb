@@ -2,10 +2,10 @@
       <td><%= name.title %></td>
       <td><%= name.subtitle %></td>
       <td>
-        <div class="btn-group">
-          <%= link_to "#{name.votes_for} <i class='icon-thumbs-up'></i>".html_safe, {:remote => true, :controller => 'names', :action => 'vote', :id => name.id, :format => 'json'},
+        <div class="btn-group" id="<%= name.id%>">
+          <%= link_to "#{name.votes_for} <i class='icon-thumbs-up'></i>".html_safe, {:remote => true, :controller => 'names', :action => 'vote', :id => "#{name.id}_up", :format => 'json'},
           {:class => 'btn btn-success', :id => "item_#{name.id}_up"} %>
-          <%= link_to "#{name.votes_against} <i class='icon-thumbs-down'></i>".html_safe, {:remote => true, :controller => 'names', :action => 'vote', :id => name.id, :vote => 'false', :format => 'json' },
+          <%= link_to "#{name.votes_against} <i class='icon-thumbs-down'></i>".html_safe, {:remote => true, :controller => 'names', :action => 'vote', :id => "#{name.id}_up", :vote => 'false', :format => 'json' },
           {:class => 'btn btn-danger', :id => "item_#{name.id}_down"} %>
         </div>
       </td>

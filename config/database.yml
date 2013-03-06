@@ -52,7 +52,7 @@ test:
   password:
 
 production:
-  adapter: sqlite3
+  adapter: postgres
   encoding: unicode
   database: naming_contest_production
   pool: 5

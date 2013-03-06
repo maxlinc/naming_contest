@@ -1,0 +1,3 @@
+<% unless @names.empty? %>
+$("#suggestions").append("<%=raw escape_javascript(render(@names)) %>");
+<% end %>

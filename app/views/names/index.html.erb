@@ -5,33 +5,27 @@
  /*table th, table td { overflow: hidden; }*/
 </style>
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th style="width: 30%">Title</th>
-      <th style="width: 60%">Subtitle</th>
-      <th style="width: 10%"></th>
-    </tr>
-  </thead>
+Names: <%= @names.size %>
+Votes: <%= @votes.size %>
+<div class="row-fluid">
+    <div class="span8">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th style="width: 30%">Title</th>
+            <th style="width: 60%">Subtitle</th>
+            <th style="width: 10%"></th>
+          </tr>
+        </thead>
 
-  <tbody>
-    <% @names.each do |name| %>
-    <tr>
-      <td><%= name.title %></td>
-      <td><%= name.subtitle %></td>
-      <td>
-        <div class="btn-group">
-          <%= link_to "#{name.votes_for} <i class='icon-thumbs-up'></i>".html_safe, {:remote => true, :controller => 'names', :action => 'vote', :id => name.id, :format => 'json'},
-          {:class => 'btn btn-success', :id => "item_#{name.id}_up"} %>
-          <%= link_to "#{name.votes_against} <i class='icon-thumbs-down'></i>".html_safe, {:remote => true, :controller => 'names', :action => 'vote', :id => name.id, :vote => 'false', :format => 'json' },
-          {:class => 'btn btn-danger', :id => "item_#{name.id}_down"} %>
-        </div>
-      </td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+        <tbody id="suggestions">
+            <%= render 'suggestions' %>
+        </tbody>
+      </table>
+      <%= link_to '<font color=\'white\'>Suggest New Title</font>'.html_safe, new_name_path, {:class => 'btn btn-primary'} %>
+    </div>
 
+    <div class="span4" id="votes">
+      <%= render @votes %>
+    </div>
 <br />
-
-<%= link_to '<font color=\'white\'>Suggest New Title</font>'.html_safe, new_name_path, {:class => 'btn btn-primary'} %>

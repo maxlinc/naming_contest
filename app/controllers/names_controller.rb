@@ -6,7 +6,9 @@ class NamesController < ApplicationController
   # GET /names
   # GET /names.json
   def index
-    @names = Name.all
+    after = params[:after] ||= 0
+    @names = Name.where("created_at > ?", Time.at(after.to_i + 1))
+    @votes = Vote.where("created_at > ?", Time.at(after.to_i + 1))
   end
 
   # GET /names/1
@@ -63,6 +65,10 @@ class NamesController < ApplicationController
       format.html { redirect_to names_url }
       format.json { head :no_content }
     end
+  end
+
+  def votes
+    @votes = Vote.where("created_at > ?", Time.at(params[:after].to_i + 1))
   end
 
   def vote

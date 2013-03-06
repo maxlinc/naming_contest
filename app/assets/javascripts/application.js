@@ -38,3 +38,35 @@ var get_value = function(event, data) {
     return data.down;
   }
 }
+
+$(function() {
+  if ($("#suggestions").length > 0) {
+    setTimeout(updateSuggestions, 5000);
+  }
+});
+
+function updateSuggestions () {
+  if ($(".suggestion").length > 0) {
+    var after = $(".suggestion:last-child").attr("data-time");
+  } else {
+    var after = "0";
+  }
+  $.getScript("/names.js?after=" + after)
+  setTimeout(updateSuggestions, 5000);
+}
+
+$(function() {
+  if ($("#votes").length > 0) {
+    setTimeout(updateVotes, 5000);
+  }
+});
+
+function updateVotes () {
+  if ($(".vote").length > 0) {
+    var after = $(".vote:last-child").attr("data-time");
+  } else {
+    var after = "0";
+  }
+  $.getScript("/votes.js?after=" + after)
+  setTimeout(updateVotes, 5000);
+}

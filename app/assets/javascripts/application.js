@@ -76,7 +76,7 @@ $(function() {
 
 function updateSuggestions () {
   if ($(".suggestion").length > 0) {
-    var after = $(".suggestion:first-child").attr("data-time");
+    var after = $(".suggestion:last-child").attr("data-time");
   } else {
     var after = "0";
   }
@@ -92,7 +92,7 @@ $(function() {
 
 function updateVotes () {
   if ($(".vote").length > 0) {
-    var after = $(".vote:last-child").attr("data-time");
+    var after = $(".vote:first-child").attr("data-time");
   } else {
     var after = "0";
   }

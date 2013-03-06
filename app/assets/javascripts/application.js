@@ -33,6 +33,11 @@ var update_score = function(data) {
                   });
 }
 
+var bootstrap_alert = function() {}
+bootstrap_alert.warning = function(message) {
+  $('#alert_placeholder').html('<div class="alert"><a class="close" data-dismiss="alert">×</a><span>'+message+'</span></div>')
+}
+
 jQuery(function($) {
 
   // create a convenient toggleLoading function
@@ -43,6 +48,10 @@ jQuery(function($) {
     .bind("ajax:complete", toggleLoading)
     .bind("ajax:success", function(event, data, status, xhr) {
       update_score(data);
+    })
+    .bind("ajax:error", function (xhr, status, error) {
+      alert = JSON.parse(status.responseText).alert;
+      bootstrap_alert.warning(alert);
     });
 });
 
@@ -67,7 +76,7 @@ $(function() {
 
 function updateSuggestions () {
   if ($(".suggestion").length > 0) {
-    var after = $(".suggestion:last-child").attr("data-time");
+    var after = $(".suggestion:first-child").attr("data-time");
   } else {
     var after = "0";
   }

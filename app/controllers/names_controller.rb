@@ -44,11 +44,19 @@ class NamesController < ApplicationController
   end
 
   def vote
-    against = (params[:vote] == 'false')
-    if against
-      current_user.vote_exclusively_against @name
+    unless current_user.out_of_votes?
+      against = (params[:vote] == 'false')
+      begin
+        if against
+          current_user.vote_against @name
+        else
+          current_user.vote_for @name
+        end
+      rescue => e
+        render :json => {alert: e.message}, :status => 403 and return
+      end
     else
-      current_user.vote_exclusively_for @name
+      render :json => {alert: "You're out of votes"}, :status => 403 and return
     end
 
     score

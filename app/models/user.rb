@@ -15,4 +15,9 @@ class User < ActiveRecord::Base
       User.create!(:email => data["email"], :password => Devise.friendly_token[0,20])
     end
   end
+
+  def out_of_votes?
+    votes_used = votes.size
+    votes_used > 5
+  end
 end
